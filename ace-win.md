@@ -129,12 +129,21 @@ git clone -b master --depth 2 https://github.com/DOCGroup/MPC.git
  4. 用Visual Studio 打开工程文件,并全编译
 
 ### 设置环境变量
+ 
+ 官网源代码不必设置MPC_ROOT环境变量
   ```
   set ACE_ROOT=c:\dre\ACE_wrappers
   set TAO_ROOT=%ACE_ROOT%\TAO
   set PATH=%PATH%;%ACE_ROOT%\bin;%ACE_ROOT%\lib
   ```
- 
+如果是从github抓的代码，需要设置MPC_ROOT
+  ```
+  set ACE_ROOT=c:\dre\ACE_wrappers
+  set TAO_ROOT=c:\dre\TAO
+  set MPC_ROOT=c:\dre\MPC
+  set PATH=%PATH%;%ACE_ROOT%\bin;%ACE_ROOT%\lib
+  ```
+
  Windows下设置环境变量正确姿势请参考：
  ~~~
  http://jingyan.baidu.com/article/d5a880eb6aca7213f047cc6c.html
@@ -183,5 +192,23 @@ mwc.pl -type vc14 --name_modifies "*_vc14" TAO_ACE.wmc
 
 https://github.com/stonejiang208/ace-win.git
 
+用mwc生成Hello.sln及vcxporoj文件：
+
+```
+cd ace-win32\src\Hello
+mwc.pl -type vc14
+```
+
+用Visual Studio编译Hello.sln，可得到server.exe和client.exe。
+
+运行 run_test.pl，如得到
+```
+C:\self-media\ace-win\src\Hello>run_test.pl
+(192460|192464) - string returned <Hello there!>
+(192440|192444) server - event loop finished
+
+```
+
+则表示环境搭建成功，您可以快乐的探索ACE及TAO的世界了。
 
 
